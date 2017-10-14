@@ -1,8 +1,10 @@
 const { spawn } = require('child_process');
 const { cdb, dockdb } = require('./db');
+const path = require('path');
+const server = path.join(__dirname, 'server.js');
 
 const startServer = (name, port) => {
-    const serverProcess = spawn('node', ['server.js', port], {
+    const serverProcess = spawn('node', [server, port], {
         detached: true,
         stdio: 'ignore'
       });

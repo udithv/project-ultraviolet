@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require('commander');
 const { prompt } = require('inquirer');
 const getPort = require('get-port');
@@ -7,6 +9,8 @@ const chalk = require('chalk');
 const CFonts = require('cfonts');
 
 const { getServers, startServer, stopServer } = require('./server_manager');
+const hello = require('./hello');
+
 const log = console.log;
 const error = chalk.red;
 const underline = chalk.underline;
@@ -99,6 +103,15 @@ program
                 }
             });
     });
+
+if(process.argv.length == 2) {
+    hello()
+     .then(() => program.outputHelp())
+     .catch(err => log('Something Went Wrong. \n',err));
+    
+}
+
+
 
 
 program.parse(process.argv);
